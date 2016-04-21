@@ -17,6 +17,10 @@ public class LinkedList {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        unit_test();
+    }
+    
+    private static void unit_test() {
         node a = new node();
         node b = new node();
         node c = new node();
@@ -54,6 +58,9 @@ public class LinkedList {
         a.get_previous();
         c.get_next();
         c.get_previous();
+        e.remove();
+        b.get_next();
+        b.get_previous();
     }
     
 }
@@ -77,12 +84,17 @@ class node {
     
     public int remove() throws java.lang.NullPointerException {
         node a;
-        System.out.println("Removing node: " + this.name + "\n\n");
+        System.out.println("\nRemoving node: " + this.name + "\n");
         if (this.previous != null) {
             a = this.previous;
             
             if (this.next != null) {
                 a.next = this.next;
+                this.next.previous = a;
+            }
+        } else if (this.next != null) {
+            a = this.next;
+            if (this.next.previous != null) {
                 this.next.previous = a;
             }
         }
@@ -95,9 +107,9 @@ class node {
     
     public void get_next() {
         if (this.next != null) {
-            System.out.println("next of " + this.name + " = " + this.next.name);
+            System.out.println("next of     " + this.name + " = " + this.next.name);
         } else {
-            System.out.println("This node must be the tail");
+            System.out.println(this.name + " is the tail");
         }
     }
     
@@ -105,7 +117,7 @@ class node {
         if (this.previous != null) {
             System.out.println("previous of " + this.name + " = " + this.previous.name);
         } else {
-            System.out.println("This node must be the head");
+            System.out.println(this.name + " is the head");
         }
         
     }

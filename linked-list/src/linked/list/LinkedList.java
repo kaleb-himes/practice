@@ -82,25 +82,29 @@ class node {
         return 0;
     }
     
-    public int remove() throws java.lang.NullPointerException {
-        node a;
+    public int remove() {
         System.out.println("\nRemoving node: " + this.name + "\n");
-        if (this.previous != null) {
-            a = this.previous;
-            
-            if (this.next != null) {
-                a.next = this.next;
-                this.next.previous = a;
-            }
-        } else if (this.next != null) {
-            a = this.next;
-            if (this.next.previous != null) {
-                this.next.previous = a;
-            }
+        /* Case when Node is between two other nodes*/
+        if (this.previous != null && this.next != null) {
+            this.next.previous = this.previous;
+            this.previous.next = this.next;
+            this.previous = null;
+            this.next = null;
+            this.name = null;
+        /* Case when Node is the Tail */
+        } else if (this.previous != null && this.next == null) {
+            this.previous.next = null;
+            this.previous = null;
+            this.name = null;
+        /* Case when Node is the Head */
+        } else if (this.previous == null && this.next != null) {
+            this.next.previous = null;
+            this.next = null;
+            this.name = null;
+        /* Case when Node is both Head and Tail (1 item in the list) */    
+        } else if (this.previous == null && this.next == null) {
+            this.name = null;
         }
-
-        this.previous = null;
-        this.next = null;
         
         return 0;
     }

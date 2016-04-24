@@ -11,17 +11,14 @@
 public class product_factory {
 
     public static product createProduct(String what) {
-
-        if (what.equals("Diapers")) {
-            return new diapers(40.99);
-        }
-
-        else if (what.equals("Baby Food")) {
-            return new babyFood(2.99);
-        }
-
-        else {
-            return new babyFood(0.79);
+        
+        switch (what) {
+            case "Diapers":
+                return new diapers(40.99);
+            case "Baby Food":
+                return new babyFood(2.99);
+            default:
+                return new babyFood(0.79);
         }
     }
 }
